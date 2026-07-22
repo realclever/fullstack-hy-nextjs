@@ -24,18 +24,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <nav>
-          <Link href="/">home</Link>
-          {' | '}
-          <Link href="/blogs">blogs</Link>
-        </nav>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="min-h-screen bg-slate-100 text-slate-900">
+        <header className="border-b border-slate-200 bg-white shadow-sm">
+          <nav className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+            <Link
+              href="/"
+              className="text-xl font-bold tracking-tight text-slate-900 transition hover:text-slate-600"
+            >
+              Blog app
+            </Link>
 
-        {children}
+            <div className="flex items-center gap-5 text-sm font-medium">
+              <Link
+                href="/blogs"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Blogs
+              </Link>
+              <Link
+                href="/blogs/new"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Create new
+              </Link>
+            </div>
+          </nav>
+        </header>
+
+        <main className="mx-auto w-full max-w-4xl px-6 py-10">{children}</main>
       </body>
     </html>
   );
