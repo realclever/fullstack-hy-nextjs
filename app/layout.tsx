@@ -34,13 +34,18 @@ export default function RootLayout({
             >
               Blog app
             </Link>
-
             <div className="flex items-center gap-5 text-sm font-medium">
               <Link
                 href="/blogs"
                 className="text-slate-600 transition hover:text-slate-950"
               >
                 Blogs
+              </Link>
+              <Link
+                href="/users"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Users
               </Link>
               <Link
                 href="/blogs/new"
@@ -51,7 +56,6 @@ export default function RootLayout({
             </div>
           </nav>
         </header>
-
         <main className="mx-auto w-full max-w-4xl px-6 py-10">{children}</main>
       </body>
     </html>
