@@ -8,7 +8,7 @@ const Blogs = async ({
 }) => {
   const { filter = '' } = await searchParams;
 
-  const blogs = [...getBlogs()]
+  const blogs = [...(await getBlogs())]
     .sort((a, b) => b.likes - a.likes)
     .filter((blog) => blog.title.toLowerCase().includes(filter.toLowerCase()));
 
