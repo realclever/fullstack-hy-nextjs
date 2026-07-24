@@ -1,6 +1,15 @@
+'use client';
+
+import { useActionState } from 'react';
 import { createBlog } from '../../actions/blogs';
 
+const initialState = {
+  error: '',
+};
+
 const NewBlog = () => {
+  const [state, formAction] = useActionState(createBlog, initialState);
+
   return (
     <section className="mx-auto max-w-2xl">
       <div className="mb-8">
@@ -11,9 +20,8 @@ const NewBlog = () => {
           Add a new entry to the blog collection
         </p>
       </div>
-
       <form
-        action={createBlog}
+        action={formAction}
         className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
       >
         <div>
@@ -28,11 +36,11 @@ const NewBlog = () => {
             type="text"
             name="title"
             required
+            minLength={5}
             placeholder="Next.js for cats"
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
-
         <div>
           <label
             htmlFor="author"
@@ -45,11 +53,11 @@ const NewBlog = () => {
             type="text"
             name="author"
             required
+            minLength={5}
             placeholder="Professor Cat III"
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
-
         <div>
           <label
             htmlFor="url"
@@ -62,11 +70,15 @@ const NewBlog = () => {
             type="url"
             name="url"
             required
+            minLength={5}
             placeholder="https://example.com/cats"
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
 
+        {state.error && (
+          <p className="text-sm font-medium text-red-600">{state.error}</p>
+        )}
         <div className="flex justify-end">
           <button
             type="submit"
