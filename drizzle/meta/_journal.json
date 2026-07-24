@@ -15,6 +15,13 @@
       "when": 1784840887604,
       "tag": "0001_overconfident_patch",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1784849605103,
+      "tag": "0002_adorable_gressill",
+      "breakpoints": true
     }
   ]
 }
