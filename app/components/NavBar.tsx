@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
 export default function NavBar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <header className="border-b border-slate-200 bg-white shadow-sm">
@@ -28,47 +28,48 @@ export default function NavBar() {
           >
             Users
           </Link>
-          {session ? (
-            <>
-              <Link
-                href="/blogs/new"
-                className="text-slate-600 transition hover:text-slate-950"
-              >
-                Create new
-              </Link>
-              <span className="text-slate-500">
-                Signed in as{' '}
+          {status !== 'loading' &&
+            (session ? (
+              <>
                 <Link
-                  href={`/users/${session.user?.email}`}
-                  className="font-medium text-slate-700 transition hover:text-slate-950 hover:underline"
+                  href="/blogs/new"
+                  className="text-slate-600 transition hover:text-slate-950"
                 >
-                  {session.user?.name}
+                  Create new
                 </Link>
-              </span>
-              <button
-                type="button"
-                onClick={() => signOut()}
-                className="text-slate-600 transition hover:text-slate-950 hover:underline"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                href="/login"
-                className="text-slate-600 transition hover:text-slate-950"
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="text-slate-600 transition hover:text-slate-950"
-              >
-                Register
-              </Link>
-            </>
-          )}
+                <span className="text-slate-500">
+                  Signed in as{' '}
+                  <Link
+                    href={`/users/${session.user?.email}`}
+                    className="font-medium text-slate-700 transition hover:text-slate-950 hover:underline"
+                  >
+                    {session.user?.name}
+                  </Link>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => signOut()}
+                  className="text-slate-600 transition hover:text-slate-950 hover:underline"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-slate-600 transition hover:text-slate-950"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="text-slate-600 transition hover:text-slate-950"
+                >
+                  Register
+                </Link>
+              </>
+            ))}
         </div>
       </nav>
     </header>

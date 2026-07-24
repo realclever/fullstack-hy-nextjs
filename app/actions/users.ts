@@ -1,6 +1,7 @@
 'use server';
 
 import bcrypt from 'bcryptjs';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { db } from '@/db';
 import { users } from '@/db/schema';
@@ -18,5 +19,7 @@ export const registerUser = async (formData: FormData) => {
     passwordHash,
   });
 
+  revalidatePath('/users');
+  revalidatePath(`/users/${username}`);
   redirect('/login');
 };
