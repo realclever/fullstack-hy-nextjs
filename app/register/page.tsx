@@ -1,10 +1,20 @@
+'use client';
+
+import { useActionState } from 'react';
 import { registerUser } from '../actions/users';
 
+const initialState = {
+  error: '',
+};
+
 export default function RegisterPage() {
+  const [state, formAction] = useActionState(registerUser, initialState);
+
   return (
     <div className="mx-auto max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
       <h1 className="mb-6 text-2xl font-bold">Register</h1>
-      <form action={registerUser} className="space-y-4">
+
+      <form action={formAction} className="space-y-4">
         <div>
           <label
             htmlFor="username"
@@ -50,6 +60,24 @@ export default function RegisterPage() {
             className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
           />
         </div>
+        <div>
+          <label
+            htmlFor="passwordConfirm"
+            className="mb-1 block text-sm font-medium text-slate-700"
+          >
+            Confirm password
+          </label>
+          <input
+            id="passwordConfirm"
+            name="passwordConfirm"
+            type="password"
+            required
+            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+          />
+        </div>
+        {state.error && (
+          <p className="text-sm font-medium text-red-600">{state.error}</p>
+        )}
         <button
           type="submit"
           className="rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-700"
