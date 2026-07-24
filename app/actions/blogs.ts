@@ -6,7 +6,14 @@ import { auth } from '@/auth';
 import { addBlog, addLike } from '../services/blogs';
 
 export const createBlog = async (
-  _prevState: { error: string },
+  _prevState: {
+    error: string;
+    values: {
+      title: string;
+      author: string;
+      url: string;
+    };
+  },
   formData: FormData,
 ) => {
   const session = await auth();
@@ -20,15 +27,24 @@ export const createBlog = async (
   const url = (formData.get('url') as string).trim();
 
   if (!title || title.length < 5) {
-    return { error: 'Title must be at least 5 characters long' };
+    return {
+      error: 'Title must be at least 5 characters long',
+      values: { title, author, url },
+    };
   }
 
   if (!author || author.length < 5) {
-    return { error: 'Author must be at least 5 characters long' };
+    return {
+      error: 'Author must be at least 5 characters long',
+      values: { title, author, url },
+    };
   }
 
   if (!url || url.length < 5) {
-    return { error: 'URL must be at least 5 characters long' };
+    return {
+      error: 'URL must be at least 5 characters long',
+      values: { title, author, url },
+    };
   }
 
   await addBlog(title, author, url);

@@ -5,6 +5,11 @@ import { createBlog } from '../../actions/blogs';
 
 const initialState = {
   error: '',
+  values: {
+    title: '',
+    author: '',
+    url: '',
+  },
 };
 
 const NewBlog = () => {
@@ -38,6 +43,7 @@ const NewBlog = () => {
             required
             minLength={5}
             placeholder="Next.js for cats"
+            defaultValue={state.values.title}
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
@@ -55,6 +61,7 @@ const NewBlog = () => {
             required
             minLength={5}
             placeholder="Professor Cat III"
+            defaultValue={state.values.author}
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
@@ -72,6 +79,7 @@ const NewBlog = () => {
             required
             minLength={5}
             placeholder="https://example.com/cats"
+            defaultValue={state.values.url}
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
