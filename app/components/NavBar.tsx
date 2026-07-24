@@ -15,7 +15,6 @@ export default function NavBar() {
         >
           Blog app
         </Link>
-
         <div className="flex items-center gap-5 text-sm font-medium">
           <Link
             href="/blogs"
@@ -23,7 +22,6 @@ export default function NavBar() {
           >
             Blogs
           </Link>
-
           <Link
             href="/users"
             className="text-slate-600 transition hover:text-slate-950"
@@ -38,7 +36,6 @@ export default function NavBar() {
               >
                 Create new
               </Link>
-
               <span className="text-slate-500">
                 Signed in as{' '}
                 <Link
@@ -57,12 +54,20 @@ export default function NavBar() {
               </button>
             </>
           ) : (
-            <Link
-              href="/login"
-              className="text-slate-600 transition hover:text-slate-950"
-            >
-              Login
-            </Link>
+            <>
+              <Link
+                href="/login"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Register
+              </Link>
+            </>
           )}
         </div>
       </nav>
