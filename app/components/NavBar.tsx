@@ -16,60 +16,63 @@ export default function NavBar() {
           Blog app
         </Link>
         <div className="flex items-center gap-5 text-sm font-medium">
-          <Link
-            href="/blogs"
-            className="text-slate-600 transition hover:text-slate-950"
-          >
-            Blogs
-          </Link>
-          <Link
-            href="/users"
-            className="text-slate-600 transition hover:text-slate-950"
-          >
-            Users
-          </Link>
-          {status !== 'loading' &&
-            (session ? (
-              <>
-                <Link
-                  href="/blogs/new"
-                  className="text-slate-600 transition hover:text-slate-950"
-                >
-                  Create new
-                </Link>
-                <span className="text-slate-500">
-                  Signed in as{' '}
+          {status !== 'loading' && (
+            <>
+              <Link
+                href="/blogs"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Blogs
+              </Link>
+              <Link
+                href="/users"
+                className="text-slate-600 transition hover:text-slate-950"
+              >
+                Users
+              </Link>
+              {session ? (
+                <>
                   <Link
-                    href={`/users/${session.user?.email}`}
-                    className="font-medium text-slate-700 transition hover:text-slate-950 hover:underline"
+                    href="/blogs/new"
+                    className="text-slate-600 transition hover:text-slate-950"
                   >
-                    {session.user?.name}
+                    Create new
                   </Link>
-                </span>
-                <button
-                  type="button"
-                  onClick={() => signOut()}
-                  className="text-slate-600 transition hover:text-slate-950 hover:underline"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="text-slate-600 transition hover:text-slate-950"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/register"
-                  className="text-slate-600 transition hover:text-slate-950"
-                >
-                  Register
-                </Link>
-              </>
-            ))}
+                  <span className="text-slate-500">
+                    Signed in as{' '}
+                    <Link
+                      href={`/users/${session.user?.email}`}
+                      className="font-medium text-slate-700 transition hover:text-slate-950 hover:underline"
+                    >
+                      {session.user?.name}
+                    </Link>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => signOut()}
+                    className="text-slate-600 transition hover:text-slate-950 hover:underline"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="text-slate-600 transition hover:text-slate-950"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="text-slate-600 transition hover:text-slate-950"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+            </>
+          )}
         </div>
       </nav>
     </header>
