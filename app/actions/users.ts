@@ -1,10 +1,12 @@
 'use server';
 
 import bcrypt from 'bcryptjs';
+import { randomUUID } from 'crypto';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { db } from '@/db';
 import { users } from '@/db/schema';
+import { getCurrentUser } from '@/app/services/session';
 
 export const registerUser = async (
   _prevState: {
@@ -73,4 +75,16 @@ export const registerUser = async (
     success: true,
     name,
   };
+};
+
+export const generateToken = async () => {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new Error('Not logged in');
+  }
+
+  const token = randomUUID();
+  await db.update(users).set({ token }).where(eq(users.id, user.id));
+  revalidatePath('/me');
 };

@@ -14,13 +14,36 @@ const UserPage = async ({
     notFound();
   }
 
+  const initials = user.name
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
+  const totalLikes = user.blogs.reduce((sum, blog) => sum + blog.likes, 0);
+
   return (
     <section>
-      <div className="mb-8">
+      <div className="mb-10">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          {user.name}
+          Profile
         </h1>
-        <p className="mt-2 text-slate-600">@{user.username}</p>
+        <div className="mt-6 flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-slate-100 text-lg font-bold text-slate-700">
+            {initials}
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              {user.name}
+            </h2>
+            <p className="mt-1 text-sm text-slate-500">@{user.username}</p>
+            <p className="mt-2 text-sm text-slate-500">
+              {user.blogs.length} {user.blogs.length === 1 ? 'blog' : 'blogs'} ·{' '}
+              {totalLikes} total {totalLikes === 1 ? 'like' : 'likes'}
+            </p>
+          </div>
+        </div>
       </div>
       <h2 className="mb-4 text-xl font-semibold text-slate-900">Blogs</h2>
       {user.blogs.length === 0 ? (
@@ -43,7 +66,7 @@ const UserPage = async ({
                     </p>
                   </div>
                   <span className="shrink-0 rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600">
-                    {blog.likes} likes
+                    {blog.likes} {blog.likes === 1 ? 'like' : 'likes'}
                   </span>
                 </div>
               </Link>

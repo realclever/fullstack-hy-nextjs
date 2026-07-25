@@ -52,15 +52,13 @@ export default function NavBar() {
                   >
                     Create new
                   </Link>
-                  <span className="text-slate-500">
-                    Signed in as{' '}
-                    <Link
-                      href={`/users/${session.user?.email}`}
-                      className="font-medium text-slate-700 transition hover:text-slate-950 hover:underline"
-                    >
-                      {session.user?.name}
-                    </Link>
-                  </span>
+                  <Link
+                    href="/me"
+                    className="text-slate-600 transition hover:text-slate-950"
+                  >
+                    Me
+                  </Link>
+
                   <button
                     type="button"
                     onClick={handleLogout}
