@@ -3,12 +3,15 @@
 import bcrypt from 'bcryptjs';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 import { db } from '@/db';
 import { users } from '@/db/schema';
 
 export const registerUser = async (
-  _prevState: { error: string },
+  _prevState: {
+    error: string;
+    success: boolean;
+    name: string;
+  },
   formData: FormData,
 ) => {
   const username = (formData.get('username') as string).trim();
@@ -17,15 +20,27 @@ export const registerUser = async (
   const passwordConfirm = formData.get('passwordConfirm') as string;
 
   if (username.length < 4) {
-    return { error: 'Username must be at least 4 characters long' };
+    return {
+      error: 'Username must be at least 4 characters long',
+      success: false,
+      name: '',
+    };
   }
 
   if (password.length < 4) {
-    return { error: 'Password must be at least 4 characters long' };
+    return {
+      error: 'Password must be at least 4 characters long',
+      success: false,
+      name: '',
+    };
   }
 
   if (password !== passwordConfirm) {
-    return { error: 'Passwords do not match' };
+    return {
+      error: 'Passwords do not match',
+      success: false,
+      name: '',
+    };
   }
 
   const existingUser = await db
@@ -35,7 +50,11 @@ export const registerUser = async (
     .limit(1);
 
   if (existingUser.length > 0) {
-    return { error: 'Username is already taken' };
+    return {
+      error: 'Username is already taken',
+      success: false,
+      name: '',
+    };
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -48,5 +67,10 @@ export const registerUser = async (
 
   revalidatePath('/users');
   revalidatePath(`/users/${username}`);
-  redirect('/login');
+
+  return {
+    error: '',
+    success: true,
+    name,
+  };
 };

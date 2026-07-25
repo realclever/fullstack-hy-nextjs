@@ -1,14 +1,27 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { registerUser } from '../actions/users';
+import { useNotification } from '../components/NotificationContext';
 
 const initialState = {
   error: '',
+  success: false,
+  name: '',
 };
 
 export default function RegisterPage() {
   const [state, formAction] = useActionState(registerUser, initialState);
+  const { showNotification } = useNotification();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      showNotification(`Welcome to Blog App, ${state.name}!`);
+      router.push('/login');
+    }
+  }, [state, showNotification, router]);
 
   return (
     <div className="mx-auto max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">

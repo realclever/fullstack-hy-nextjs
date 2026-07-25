@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -23,4 +23,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes notification-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) translateX(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+    fill: transparent;
+  }
+
+  50% {
+    transform: scale(1.75);
+    fill: #fb7185;
+    color: #f43f5e;
+  }
+
+  100% {
+    transform: scale(1);
+    fill: transparent;
+  }
 }

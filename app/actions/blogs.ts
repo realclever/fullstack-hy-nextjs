@@ -8,6 +8,7 @@ import { addBlog, addLike } from '../services/blogs';
 export const createBlog = async (
   _prevState: {
     error: string;
+    success: boolean;
     values: {
       title: string;
       author: string;
@@ -29,6 +30,7 @@ export const createBlog = async (
   if (!title || title.length < 5) {
     return {
       error: 'Title must be at least 5 characters long',
+      success: false,
       values: { title, author, url },
     };
   }
@@ -36,6 +38,7 @@ export const createBlog = async (
   if (!author || author.length < 5) {
     return {
       error: 'Author must be at least 5 characters long',
+      success: false,
       values: { title, author, url },
     };
   }
@@ -43,13 +46,23 @@ export const createBlog = async (
   if (!url || url.length < 5) {
     return {
       error: 'URL must be at least 5 characters long',
+      success: false,
       values: { title, author, url },
     };
   }
 
   await addBlog(title, author, url);
   revalidatePath('/blogs');
-  redirect('/blogs');
+
+  return {
+    error: '',
+    success: true,
+    values: {
+      title,
+      author: '',
+      url: '',
+    },
+  };
 };
 
 export const likeBlog = async (formData: FormData) => {

@@ -1,10 +1,24 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { useNotification } from './NotificationContext';
 
 export default function NavBar() {
   const { data: session, status } = useSession();
+  const router = useRouter();
+  const { showNotification } = useNotification();
+
+  const handleLogout = async () => {
+    const name = session?.user?.name ?? 'there';
+
+    await signOut({ redirect: false });
+
+    showNotification(`Bye, ${name}!`);
+    router.push('/');
+    router.refresh();
+  };
 
   return (
     <header className="border-b border-slate-200 bg-white shadow-sm">
@@ -49,7 +63,7 @@ export default function NavBar() {
                   </span>
                   <button
                     type="button"
-                    onClick={() => signOut()}
+                    onClick={handleLogout}
                     className="text-slate-600 transition hover:text-slate-950 hover:underline"
                   >
                     Logout

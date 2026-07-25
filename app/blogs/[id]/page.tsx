@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
-import { likeBlog } from '../../actions/blogs';
+
 import { getBlogById } from '../../services/blogs';
+import LikeButton from './LikeButton';
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -24,26 +25,8 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             <div className="rounded-full bg-slate-100 px-4 py-2 text-center text-sm font-medium text-slate-700">
               {blog.likes} likes
             </div>
-            <form action={likeBlog}>
-              <input type="hidden" name="id" value={blog.id} />
-              <button
-                type="submit"
-                aria-label="Like blog"
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-500 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-500"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.9"
-                  className="h-4 w-4"
-                >
-                  <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" />
-                </svg>
-                Like
-              </button>
-            </form>
+
+            <LikeButton blogId={blog.id} />
           </div>
         </div>
         <a
