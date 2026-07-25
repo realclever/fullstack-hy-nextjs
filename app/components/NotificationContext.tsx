@@ -15,11 +15,13 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
   const [notification, setNotification] = useState('');
 
   const showNotification = (message: string) => {
-    setNotification(message);
-
     setTimeout(() => {
-      setNotification('');
-    }, 3000);
+      setNotification(message);
+
+      setTimeout(() => {
+        setNotification('');
+      }, 3000);
+    }, 700);
   };
 
   return (
