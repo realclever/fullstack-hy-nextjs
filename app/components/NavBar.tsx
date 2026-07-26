@@ -62,7 +62,7 @@ export default function NavBar() {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="text-slate-600 transition hover:text-slate-950 hover:underline"
+                    className="cursor-pointer text-slate-600 transition hover:text-slate-950 hover:underline"
                   >
                     Logout
                   </button>

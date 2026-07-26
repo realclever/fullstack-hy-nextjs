@@ -33,6 +33,9 @@ export const addBlog = async (title: string, author: string, url: string) => {
 export const getBlogById = async (id: number) => {
   return db.query.blogs.findFirst({
     where: eq(blogs.id, id),
+    with: {
+      user: true,
+    },
   });
 };
 
