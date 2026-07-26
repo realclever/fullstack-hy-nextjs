@@ -1,7 +1,11 @@
-import { redirect } from 'next/navigation';
+import Homepage from './homepage.mdx';
 
 const Home = () => {
-  redirect('/blogs');
+  return (
+    <div className="markdown">
+      <Homepage />
+    </div>
+  );
 };
 
 export default Home;
