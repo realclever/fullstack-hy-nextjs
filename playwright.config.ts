@@ -3,6 +3,10 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
 
+  reporter: process.env.CI
+    ? [['line'], ['html', { outputFolder: 'playwright-report', open: 'never' }]]
+    : 'list',
+
   use: {
     baseURL: 'http://localhost:3000',
   },
