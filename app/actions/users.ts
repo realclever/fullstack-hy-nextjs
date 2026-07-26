@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { db } from '@/db';
 import { users } from '@/db/schema';
 import { getCurrentUser } from '@/app/services/session';
+import { markReadingListEntryAsRead } from '@/app/services/users';
 
 export const registerUser = async (
   _prevState: {
@@ -86,5 +87,11 @@ export const generateToken = async () => {
 
   const token = randomUUID();
   await db.update(users).set({ token }).where(eq(users.id, user.id));
+  revalidatePath('/me');
+};
+
+export const markAsRead = async (formData: FormData) => {
+  const entryId = Number(formData.get('entryId'));
+  await markReadingListEntryAsRead(entryId);
   revalidatePath('/me');
 };

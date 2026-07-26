@@ -1,6 +1,7 @@
-import { asc, eq } from 'drizzle-orm';
+import { and, asc, eq } from 'drizzle-orm';
 import { db } from '../../db';
-import { blogs, users } from '../../db/schema';
+import { blogs, readingList, users } from '../../db/schema';
+import { getCurrentUser } from './session';
 
 export const getUsers = async () => {
   const allUsers = await db.query.users.findMany({
@@ -39,4 +40,17 @@ export const getUserWithReadingList = async (username: string) => {
       },
     },
   });
+};
+
+export const markReadingListEntryAsRead = async (entryId: number) => {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new Error('Not logged in');
+  }
+
+  await db
+    .update(readingList)
+    .set({ read: true })
+    .where(and(eq(readingList.id, entryId), eq(readingList.userId, user.id)));
 };
