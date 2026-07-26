@@ -102,9 +102,10 @@ const NewBlog = () => {
         <div className="flex justify-end">
           <button
             type="submit"
+            data-testid="create-blog-button"
             className="rounded-lg bg-slate-900 px-5 py-3 font-medium text-white transition hover:bg-slate-700"
           >
-            Create blog
+            Create
           </button>
         </div>
       </form>

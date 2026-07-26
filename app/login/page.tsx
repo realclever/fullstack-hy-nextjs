@@ -39,7 +39,10 @@ export default function LoginPage() {
     <div className="mx-auto max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
       <h1 className="mb-6 text-2xl font-bold">Login</h1>
       {error && (
-        <p className="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p
+          data-testid="error-message"
+          className="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700"
+        >
           {error}
         </p>
       )}
@@ -76,6 +79,7 @@ export default function LoginPage() {
         </div>
         <button
           type="submit"
+          data-testid="login-button"
           className="rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-700"
         >
           Login

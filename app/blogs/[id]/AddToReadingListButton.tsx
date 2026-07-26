@@ -25,6 +25,7 @@ const AddToReadingListButton = ({
       <input type="hidden" name="blogId" value={blogId} />
       <button
         type="submit"
+        data-testid="add-to-reading-list-button"
         disabled={isPending}
         className="w-36 cursor-pointer rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-200 disabled:cursor-wait disabled:opacity-60"
       >

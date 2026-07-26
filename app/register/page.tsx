@@ -78,7 +78,7 @@ export default function RegisterPage() {
             htmlFor="passwordConfirm"
             className="mb-1 block text-sm font-medium text-slate-700"
           >
-            Confirm password
+            Confirm Password
           </label>
           <input
             id="passwordConfirm"
@@ -89,10 +89,22 @@ export default function RegisterPage() {
           />
         </div>
         {state.error && (
-          <p className="text-sm font-medium text-red-600">{state.error}</p>
+          <p
+            data-testid={
+              state.error.startsWith('Username')
+                ? 'username-error'
+                : state.error === 'Passwords do not match'
+                  ? 'passwordConfirm-error'
+                  : 'registration-error'
+            }
+            className="text-sm font-medium text-red-600"
+          >
+            {state.error}
+          </p>
         )}
         <button
           type="submit"
+          data-testid="register-button"
           className="rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-700"
         >
           Register

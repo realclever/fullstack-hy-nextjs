@@ -88,6 +88,7 @@ export const generateToken = async () => {
   const token = randomUUID();
   await db.update(users).set({ token }).where(eq(users.id, user.id));
   revalidatePath('/me');
+  return token;
 };
 
 export const markAsRead = async (formData: FormData) => {

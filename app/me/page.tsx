@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { generateToken, markAsRead } from '../actions/users';
+import { markAsRead } from '../actions/users';
 import { getCurrentUser } from '../services/session';
 import { getUserWithReadingList } from '../services/users';
+import ApiTokenSection from './ApiTokenSection';
 
 const MePage = async () => {
   const currentUser = await getCurrentUser();
@@ -29,7 +30,7 @@ const MePage = async () => {
 
   return (
     <section>
-      <div className="mb-10">
+      <div className="mb-10" data-testid="user-profile">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
           My profile
         </h1>
@@ -38,30 +39,45 @@ const MePage = async () => {
             {initials}
           </div>
           <div>
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+            <h2
+              data-testid="user-name"
+              className="text-2xl font-bold tracking-tight text-slate-900"
+            >
               {user.name}
             </h2>
-
-            <p className="mt-1 text-sm text-slate-500">@{user.username}</p>
+            <p
+              data-testid="user-username"
+              className="mt-1 text-sm text-slate-500"
+            >
+              @{user.username}
+            </p>
           </div>
         </div>
       </div>
-      <div className="mb-10">
+
+      <div className="mb-10" data-testid="reading-list-section">
         <h2 className="mb-4 text-xl font-semibold text-slate-900">
           Reading list
         </h2>
         {user.readingList.length === 0 ? (
           <div className="rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
-            <p className="text-slate-500">No blogs in your reading list yet.</p>
+            <p data-testid="empty-reading-list" className="text-slate-500">
+              No blogs in your reading list yet.
+            </p>
           </div>
         ) : (
           <div className="grid gap-8">
-            <div>
+            <div data-testid="unread-section">
               <h3 className="mb-3 text-lg font-semibold text-slate-900">
                 Unread ({unreadEntries.length})
               </h3>
               {unreadEntries.length === 0 ? (
-                <p className="text-sm text-slate-500">No unread blogs.</p>
+                <p
+                  data-testid="no-unread-blogs"
+                  className="text-sm text-slate-500"
+                >
+                  No unread blogs.
+                </p>
               ) : (
                 <ul className="grid gap-4">
                   {unreadEntries.map((entry) => (
@@ -87,6 +103,7 @@ const MePage = async () => {
                         <input type="hidden" name="entryId" value={entry.id} />
                         <button
                           type="submit"
+                          data-testid={`mark-read-${entry.id}`}
                           className="cursor-pointer rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-200"
                         >
                           Mark as read
@@ -129,27 +146,8 @@ const MePage = async () => {
           </div>
         )}
       </div>
-      <h2 className="mb-4 text-xl font-semibold text-slate-900">API token</h2>
-      <div className="rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
-        <p className="text-sm font-medium text-slate-600">Current token</p>
-        {user.token ? (
-          <code className="mt-2 block overflow-x-auto rounded-lg bg-slate-100 px-4 py-3 text-sm text-slate-700">
-            {user.token}
-          </code>
-        ) : (
-          <p className="mt-2 text-slate-500">
-            No token has been generated yet.
-          </p>
-        )}
-        <form action={generateToken} className="mt-5">
-          <button
-            type="submit"
-            className="cursor-pointer rounded-lg bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-800"
-          >
-            Generate new token
-          </button>
-        </form>
-      </div>
+
+      <ApiTokenSection initialToken={user.token} />
     </section>
   );
 };

@@ -18,7 +18,6 @@ const Blogs = async ({
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
           Blogs list
         </h1>
-
         <p className="mt-2 text-slate-600">
           Browse the entries in the blog collection.
         </p>
@@ -27,12 +26,14 @@ const Blogs = async ({
         <input
           type="text"
           name="filter"
+          data-testid="filter-input"
           defaultValue={filter}
           placeholder="Search by title"
           className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
         />
         <button
           type="submit"
+          data-testid="search-button"
           className="cursor-pointer rounded-lg border border-slate-400 bg-slate-100 px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-500 hover:bg-slate-200 hover:text-slate-950"
         >
           Search
@@ -43,7 +44,7 @@ const Blogs = async ({
           Nothing here yet — try another search.
         </p>
       ) : (
-        <ul className="grid gap-5">
+        <ul data-testid="blogs-list" className="grid gap-5">
           {blogs.map((blog) => (
             <li
               key={blog.id}

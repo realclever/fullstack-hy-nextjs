@@ -1,10 +1,10 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { getBlogById, isBlogInReadingList } from '../../services/blogs';
 import { getCurrentUser } from '../../services/session';
 import AddToReadingListButton from './AddToReadingListButton';
 import LikeButton from './LikeButton';
-import Link from 'next/link';
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -19,7 +19,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const isInReadingList = user ? await isBlogInReadingList(blog.id) : false;
 
   return (
-    <section>
+    <section data-testid="blog-detail">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
           Blog details
@@ -32,11 +32,16 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex items-start justify-between gap-6">
             <div className="min-w-0">
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+              <h2
+                data-testid="blog-title"
+                className="text-3xl font-bold tracking-tight text-slate-900"
+              >
                 {blog.title}
               </h2>
               <div className="mt-2">
-                <p className="text-slate-600">by {blog.author}</p>
+                <p data-testid="blog-author" className="text-slate-600">
+                  by {blog.author}
+                </p>
                 {blog.user && (
                   <p className="mt-1 text-sm text-slate-500">
                     added by{' '}

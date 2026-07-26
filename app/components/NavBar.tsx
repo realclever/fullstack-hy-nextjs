@@ -34,12 +34,14 @@ export default function NavBar() {
             <>
               <Link
                 href="/blogs"
+                aria-label="blogs"
                 className="text-slate-600 transition hover:text-slate-950"
               >
                 Blogs
               </Link>
               <Link
                 href="/users"
+                aria-label="users"
                 className="text-slate-600 transition hover:text-slate-950"
               >
                 Users
@@ -54,11 +56,11 @@ export default function NavBar() {
                   </Link>
                   <Link
                     href="/me"
+                    aria-label="me"
                     className="text-slate-600 transition hover:text-slate-950"
                   >
                     Me
                   </Link>
-
                   <button
                     type="button"
                     onClick={handleLogout}
@@ -71,12 +73,14 @@ export default function NavBar() {
                 <>
                   <Link
                     href="/login"
+                    aria-label="login"
                     className="text-slate-600 transition hover:text-slate-950"
                   >
                     Login
                   </Link>
                   <Link
                     href="/register"
+                    aria-label="register"
                     className="text-slate-600 transition hover:text-slate-950"
                   >
                     Register

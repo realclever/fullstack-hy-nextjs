@@ -10,7 +10,10 @@ export default function Notification() {
   }
 
   return (
-    <div className="fixed right-6 top-24 z-50 w-[min(24rem,calc(100vw-3rem))] animate-[notification-in_220ms_ease-out] rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-2xl">
+    <div
+      data-testid="notification"
+      className="fixed right-6 top-24 z-50 w-[min(24rem,calc(100vw-3rem))] animate-[notification-in_220ms_ease-out] rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-2xl"
+    >
       <div className="min-w-0">
         <div className="flex items-center gap-2">
           <p className="text-sm font-semibold text-slate-900">Blog App</p>
