@@ -1,11 +1,11 @@
+import fs from 'fs';
 import { defineConfig } from '@playwright/test';
+import dotenv from 'dotenv';
+
+const testEnv = dotenv.parse(fs.readFileSync('.env.test'));
 
 export default defineConfig({
   testDir: './tests',
-
-  reporter: process.env.CI
-    ? [['line'], ['html', { outputFolder: 'playwright-report', open: 'never' }]]
-    : 'list',
 
   use: {
     baseURL: 'http://localhost:3000',
@@ -14,7 +14,8 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
+    env: testEnv,
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });

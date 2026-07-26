@@ -12,10 +12,10 @@ const Users = async () => {
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
           Users list
         </h1>
-        <p className="mt-2 text-slate-600">View all registered users.</p>
+        <p className="mt-2 text-slate-600">View all registered users</p>
       </div>
       <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-        <div className="grid grid-cols-[1.2fr_1fr_5rem] items-center gap-4 border-b border-slate-200 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-600">
+        <div className="grid grid-cols-[1.2fr_1fr_5rem] items-center gap-4 border-b border-slate-200 bg-gray-50 px-5 py-3 text-sm font-semibold text-slate-600">
           <span>Name</span>
           <span>Username</span>
           <span className="w-12 justify-self-end text-center">Blogs</span>

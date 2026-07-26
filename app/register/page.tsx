@@ -24,14 +24,23 @@ export default function RegisterPage() {
   }, [state, showNotification, router]);
 
   return (
-    <div className="mx-auto max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="mb-6 text-2xl font-bold">Register</h1>
-
-      <form action={formAction} className="space-y-4">
+    <section className="mx-auto max-w-2xl">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          Register
+        </h1>
+        <p className="mt-2 text-slate-600">
+          Create an account to start sharing and saving blogs
+        </p>
+      </div>
+      <form
+        action={formAction}
+        className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+      >
         <div>
           <label
             htmlFor="username"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-700"
           >
             Username
           </label>
@@ -40,13 +49,13 @@ export default function RegisterPage() {
             name="username"
             type="text"
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
         <div>
           <label
             htmlFor="name"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-700"
           >
             Name
           </label>
@@ -55,13 +64,13 @@ export default function RegisterPage() {
             name="name"
             type="text"
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
         <div>
           <label
             htmlFor="password"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-700"
           >
             Password
           </label>
@@ -70,13 +79,13 @@ export default function RegisterPage() {
             name="password"
             type="password"
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
         <div>
           <label
             htmlFor="passwordConfirm"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-700"
           >
             Confirm Password
           </label>
@@ -85,7 +94,7 @@ export default function RegisterPage() {
             name="passwordConfirm"
             type="password"
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
         {state.error && (
@@ -97,19 +106,21 @@ export default function RegisterPage() {
                   ? 'passwordConfirm-error'
                   : 'registration-error'
             }
-            className="text-sm font-medium text-red-600"
+            className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
           >
             {state.error}
           </p>
         )}
-        <button
-          type="submit"
-          data-testid="register-button"
-          className="rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-700"
-        >
-          Register
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            data-testid="register-button"
+            className="rounded-lg bg-slate-900 px-5 py-3 font-medium text-white transition hover:bg-slate-700"
+          >
+            Register
+          </button>
+        </div>
       </form>
-    </div>
+    </section>
   );
 }

@@ -19,7 +19,7 @@ const Blogs = async ({
           Blogs list
         </h1>
         <p className="mt-2 text-slate-600">
-          Browse the entries in the blog collection.
+          Browse the entries in the blog collection
         </p>
       </div>
       <form method="get" className="mb-5 flex flex-col gap-3 sm:flex-row">

@@ -36,21 +36,31 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="mx-auto max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="mb-6 text-2xl font-bold">Login</h1>
-      {error && (
-        <p
-          data-testid="error-message"
-          className="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700"
-        >
-          {error}
+    <section className="mx-auto max-w-2xl">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          Login
+        </h1>
+        <p className="mt-2 text-slate-600">
+          Sign in to continue to your account
         </p>
-      )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+      >
+        {error && (
+          <p
+            data-testid="error-message"
+            className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+          >
+            {error}
+          </p>
+        )}
         <div>
           <label
             htmlFor="username"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-700"
           >
             Username
           </label>
@@ -59,13 +69,13 @@ export default function LoginPage() {
             name="username"
             type="text"
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
         <div>
           <label
             htmlFor="password"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-700"
           >
             Password
           </label>
@@ -74,17 +84,19 @@ export default function LoginPage() {
             name="password"
             type="password"
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
-        <button
-          type="submit"
-          data-testid="login-button"
-          className="rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-700"
-        >
-          Login
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            data-testid="login-button"
+            className="rounded-lg bg-slate-900 px-5 py-3 font-medium text-white transition hover:bg-slate-700"
+          >
+            Login
+          </button>
+        </div>
       </form>
-    </div>
+    </section>
   );
 }
